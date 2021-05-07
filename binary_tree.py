@@ -210,3 +210,31 @@ class Solution:
 s = Solution()
 s.maxPathSum(tree)
 # %%
+# check if it is a valid binary search tree
+class Solution():
+    def isValidBST(self, root: TreeNode) -> bool:
+        if root is None:
+            return True
+        def valid_min_max(node):
+            isvalid = True
+            if node.left is not None:
+                l_isvalid, l_min, l_max = valid_min_max(node.left)
+                isvalid = isvalid and node.val > l_max
+            else:
+                l_isvalid, l_min = True, node.val
+            
+            if node.right is not None:
+                r_isvalid, r_min, r_max = valid_min_max(node.right)
+                isvalid = isvalid and node.val < r_min
+            else:
+                r_isvalid, r_max = True, node.val
+            return l_isvalid and r_isvalid and isvalid, l_min, r_max
+        return valid_min_max(root)[0]
+
+# %%
+lst = [5, 4, 6, None, None, 3, 7]
+tree = generateTree(lst)
+s = Solution()
+s.isValidBST(tree)
+
+# %%
