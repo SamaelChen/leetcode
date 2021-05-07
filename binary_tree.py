@@ -238,3 +238,57 @@ s = Solution()
 s.isValidBST(tree)
 
 # %%
+def generateTree2(preorder, inorder):
+    if len(preorder) == 0:
+        return None
+    if len(preorder) == 1:
+        return TreeNode(preorder[0])
+    root = TreeNode(preorder[0])
+    for idx, x in enumerate(inorder):
+        if x == preorder[0]:
+            left = inorder[:idx]
+            right = inorder[idx+1:]
+            break
+    root.left = generateTree2(preorder[1:(len(left) + 1)], left)
+    root.right = generateTree2(preorder[(len(preorder) - len(right)): ], right)
+    return root
+# %%
+tree3 = generateTree2([5,4,6,3,7], [4,5,3,6,7])
+ # %%
+tree3.val
+# %%
+tree3.right.val
+# %%
+tree3.right.right.val
+# %%
+tree3.right.left.val
+# %%
+# insert into a binary search tree
+# an very stupid solution
+
+
+class Solution:
+    def insertIntoBST(self, root: TreeNode, val: int) -> TreeNode:
+        self.res = []
+
+        def inorder(root):
+            if root is None:
+                return
+            inorder(root.left)
+            self.res.append(root.val)
+            inorder(root.right)
+            return self.res
+        tmp = inorder(root)
+        if tmp is None:
+            tmp = []
+        tmp.append(val)
+        tmp.sort()
+        for x in tmp[::-1]:
+            curr = TreeNode(x)
+            if x == tmp[-1]:
+                node = curr
+                root = node
+            else:
+                node.left = curr
+                node = node.left
+        return root
