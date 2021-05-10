@@ -11,6 +11,26 @@
 #         self.val = val
 #         self.next = next
 class Solution:
+    def __init__(self):
+        self.remain = None
+    def reverseBetween(self, head, right):
+        if head.next == right:
+            self.remain = head.next
+            return head
+        last = self.reverseBetween(head.next, right)
+        head.next.next = head
+        head.next = self.remain
+        return last
     def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+        if head is None:
+            return head
+        a = b = head
+        for _ in range(k):
+            if b is None:
+                return head
+            b = b.next
+        last = self.reverseBetween(a, b)
+        a.next = self.reverseKGroup(b, k)
+        return last
 # @lc code=end
 
