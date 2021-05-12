@@ -119,3 +119,38 @@ while a is not None:
     a = a.next
 
 # %%
+def reverse(a, b):
+    if a is None:
+        return a
+    pre = None
+    curr = a
+    nxt = a
+    while curr != b:
+        nxt = curr.next
+        curr.next = pre
+        pre = curr
+        curr = nxt
+    return pre
+
+def reverseKGroup(head, k):
+    if head is None:
+        return head
+    a = b = head
+    while b is not None:
+        for _ in range(k):
+            if b is None:
+                return
+            b = b.next
+        r = reverse(a, b)
+        r.next = b
+        a = b
+    return r
+
+# %%
+lst = [1, 2, 3, 4, 5, 6]
+ln = generateLN(lst)
+a = reverseKGroup(ln, 2)
+while a is not None:
+    print(a.val)
+    a = a.next
+# %%
