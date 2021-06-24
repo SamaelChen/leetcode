@@ -6,7 +6,7 @@
 
 # @lc code=start
 class Solution:
-    def searchRange(self, nums, target):
+    def searchRangePlagiarize(self, nums, target):
         low = 0
         high = len(nums) - 1
         candidate = []
@@ -36,5 +36,26 @@ class Solution:
                 high = mid - 1
                 return [min(candidate), max(candidate)]
         return [-1, -1]
+    def searchRange(self, nums, target):
+        Range = [-1, -1]
+        if len(nums) == 0:
+            return Range
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = left + (right - left) // 2
+            if nums[mid] == target:
+                start, end = mid, mid
+                while nums[start] == nums[mid] and start >= 0:
+                    start -= 1
+                while nums[end] == nums[mid]:
+                    end += 1
+                    if end >= len(nums):
+                        break
+                return [start + 1, end - 1]
+            elif nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return Range
 # @lc code=end
 
