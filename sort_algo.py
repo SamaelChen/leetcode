@@ -1,4 +1,7 @@
 # %%
+import heapq
+
+
 class SortAlgo:
     def bubble_sort(self, arr):
         #冒泡法
