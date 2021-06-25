@@ -29,9 +29,37 @@ class SortAlgo:
             arr[min_idx], arr[idx] = arr[idx], arr[min_idx]
             min_idx += 1
         return arr
-                
+    
+    def insertion_sort(self, arr):
+        length = len(arr)
+        if length < 2:
+            return arr
+        for i in range(1, length):
+            j = i - 1
+            while arr[i] < arr[j] and j >= 0:
+                j -= 1
+            arr.insert(j+1, arr[i])
+            arr[i+1:] = arr[i+2:]
+        return arr
+            
+    def shell_sort(self, arr):
+        length = len(arr)
+        if length < 2:
+            return arr
+        gap = length // 2
+        while gap > 0:
+            if gap == 1:
+                arr = self.insertion_sort(arr)
+            else:
+                for i in range(length - gap):
+                    if arr[i] > arr[i+gap]:
+                        arr[i], arr[i+gap] = arr[i+gap], arr[i]
+            gap = gap // 2
+        return arr
 # %%
 s = SortAlgo()
-print(s.bubble_sort([5, 3, 4, 2, 1]))
-print(s.selection_sort([5, 3, 4, 2, 1]))
+print(s.bubble_sort([5, 3, 3, 4, 2, 1]))
+print(s.selection_sort([5, 3, 3, 4, 2, 1]))
+print(s.insertion_sort([2, 3, 4, 5, 3, 1]))
+print(s.shell_sort([5, 3, 3, 4, 2, 1]))
 # %%
