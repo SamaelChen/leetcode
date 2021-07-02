@@ -59,6 +59,18 @@ class SortAlgo:
                         arr[i], arr[i+gap] = arr[i+gap], arr[i]
             gap = gap // 2
         return arr
+
+    def _merge(self, left, right):
+        res = []
+        while len(left) > 0 and len(right) > 0:
+            if left[0] > right[0]:
+                res.append(right[0])
+                right = right[1:]
+            else:
+                res.append(left[0])
+                left = left[1:]
+    def merge_sort(self, arr):
+
 # %%
 s = SortAlgo()
 print(s.bubble_sort([5, 3, 3, 4, 2, 1]))
