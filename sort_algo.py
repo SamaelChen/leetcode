@@ -69,12 +69,23 @@ class SortAlgo:
             else:
                 res.append(left[0])
                 left = left[1:]
+        if len(left) > 0:
+            res.extend(left)
+        if len(right) > 0:
+            res.extend(right)
+        return res
     def merge_sort(self, arr):
-
+        if len(arr) < 2:
+            return arr
+        mid = len(arr) // 2
+        left = arr[:mid]
+        right = arr[mid:]
+        return self._merge(self.merge_sort(left), self.merge_sort(right))
 # %%
 s = SortAlgo()
-print(s.bubble_sort([5, 3, 3, 4, 2, 1]))
-print(s.selection_sort([5, 3, 3, 4, 2, 1]))
-print(s.insertion_sort([2, 3, 4, 5, 3, 1]))
-print(s.shell_sort([5, 3, 3, 4, 2, 1]))
+print('bubble', s.bubble_sort([5, 3, 3, 4, 2, 1]))
+print('selection', s.selection_sort([5, 3, 3, 4, 2, 1]))
+print('insertion', s.insertion_sort([2, 3, 4, 5, 3, 1]))
+print('shell', s.shell_sort([5, 3, 3, 4, 2, 1]))
+print('merge', s.merge_sort([5, 3, 3, 4, 2, 1]))
 # %%
