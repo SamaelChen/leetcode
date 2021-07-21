@@ -6,7 +6,7 @@
 # %%
 # @lc code=start
 class Solution:
-    def canJump(self, nums):
+    def canJumpPlagiarize(self, nums):
         if len(nums) == 1:
             return True
         end, max_position = 0, 0
@@ -20,5 +20,19 @@ class Solution:
                 end = max_position
         if max_position < len(nums) - 1:
             return False
+    
+    def canJump(self, nums):
+        if len(nums) == 1:
+            return True
+        max_position = 0
+        dp = [False for _ in range(len(nums))]
+        dp[0] = True if nums[0] != 0 else False
+        for i in range(1, len(nums)):
+            max_position = max(max_position, nums[i-1] + i-1)
+            dp[i] = dp[i-1] and max_position >= i
+        return dp[-1]
 # @lc code=end
+# %%
+# s = Solution()
+# s.canJump([3, 2, 1, 0, 4])
 # %%

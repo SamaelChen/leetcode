@@ -81,6 +81,14 @@ class SortAlgo:
         left = arr[:mid]
         right = arr[mid:]
         return self._merge(self.merge_sort(left), self.merge_sort(right))
+
+    def quick_sort(self, arr):
+        if len(arr) < 2:
+            return arr
+        pivot = arr[0]
+        left = [x for x in arr[1:] if x <= pivot]
+        right = [x for x in arr[1:] if x > pivot]
+        return self.quick_sort(left) + [pivot] + self.quick_sort(right)
 # %%
 s = SortAlgo()
 print('bubble', s.bubble_sort([5, 3, 3, 4, 2, 1]))
@@ -88,4 +96,5 @@ print('selection', s.selection_sort([5, 3, 3, 4, 2, 1]))
 print('insertion', s.insertion_sort([2, 3, 4, 5, 3, 1]))
 print('shell', s.shell_sort([5, 3, 3, 4, 2, 1]))
 print('merge', s.merge_sort([5, 3, 3, 4, 2, 1]))
+print('quick', s.quick_sort([5, 3, 3, 4, 2, 1]))
 # %%
