@@ -6,10 +6,9 @@
 
 # @lc code=start
 class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
+    def twoSum(self, nums, target: int):
         for idx, n in enumerate(nums):
             residual = target - n
-            if residual in nums[(idx + 1): ]:
+            if residual in nums[(idx + 1):]:
                 return(idx, nums[(idx + 1):].index(residual) + idx + 1)
 # @lc code=end
-

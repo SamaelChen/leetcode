@@ -14,7 +14,6 @@ class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
         if head is None:
             return None
-        dummy = ListNode(None, next=None)
         curr, peek = None, head
         while peek is not None:
             pre = ListNode(peek.val, next=curr)
@@ -22,4 +21,3 @@ class Solution:
             peek = peek.next
         return pre
 # @lc code=end
-

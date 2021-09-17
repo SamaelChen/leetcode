@@ -3,13 +3,14 @@
 #
 # [2] 两数相加
 #
-
+# %%
 # @lc code=start
 # Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
 
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
@@ -35,5 +36,44 @@ class Solution:
                 p.next = ListNode(item)
                 p = p.next
         return res
+
+    def addTwoNumbersLoop(self, l1, l2):
+        prehead = ListNode(0)
+        prev = prehead
+        a, b = 0, 0
+        while l1 and l2:
+            tmp = l1.val + l2.val + a
+            a, b = tmp // 10, tmp % 10
+            prev.next = ListNode(b)
+            l1 = l1.next
+            l2 = l2.next
+            prev = prev.next
+        if l1:
+            while l1:
+                tmp = l1.val + a
+                a, b = tmp // 10, tmp % 10
+                prev.next = ListNode(b)
+                l1 = l1.next
+                prev = prev.next
+        else:
+            while l2:
+                tmp = l2.val + a
+                a, b = tmp // 10, tmp % 10
+                prev.next = ListNode(b)
+                l2 = l2.next
+                prev = prev.next
+        if a != 0:
+            prev.next = ListNode(1)
+        return prehead.next
 # @lc code=end
 
+
+# %%
+# s = Solution()
+# l1 = ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9)))))
+# l2 = ListNode(9, ListNode(9))
+# res = s.addTwoNumbersLoop(l1, l2)
+# while res:
+#     print(res.val)
+#     res = res.next
+# %%
