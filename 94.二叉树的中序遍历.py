@@ -12,9 +12,11 @@ class TreeNode:
         self.left = left
         self.right = right
 
+
 class Solution:
     def __init__(self):
         self.res = []
+
     def inorderTraversal(self, root):
         if root is None:
             return []
@@ -23,8 +25,10 @@ class Solution:
             self.res.append(root.val)
         self.inorderTraversal(root.right)
         return self.res
-        
+
 # %%
+
+
 class Solution:
     def inorderTraversal(self, root):
         inorder = []
@@ -40,8 +44,25 @@ class Solution:
                 node = node.right
         return inorder
 
-        
+    def inorderTraversal_2(self, root):
+        if root is None:
+            return
+        res = []
+        rest = [root]
+        used = []
+        while rest:
+            curr = rest[-1]
+            if curr.left and curr.left not in used:
+                rest.append(curr.left)
+            else:
+                res.append(curr.val)
+                used.append(rest.pop(-1))
+                if curr.right and curr.right not in used:
+                    rest.append(curr.right)
+        return res
+
 # @lc code=end
+
 
 # %%
 tree = TreeNode(1)
